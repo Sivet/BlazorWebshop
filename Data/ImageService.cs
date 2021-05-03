@@ -31,5 +31,13 @@ namespace BlazorWebshop.Data
         public Task<List<Img>> getImages(){
             return Task.FromResult(imageList);
         }
+        public static Img GetSingleImg(string name){
+            foreach(Img img in imageList){
+                if(img.Name == name){
+                    return img;
+                }
+            }
+            return null;
+        }
     }
 }

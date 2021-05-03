@@ -1,8 +1,9 @@
 @page "/men"
 
 @using BlazorWebshop.Data
-@using System.Drawing
 @inject ImageService ImgService
+@inject ProductService ProductService
+@inject NavigationManager NavigationManager
 
 <h1>Men's Clothes</h1>
 <div class="row">
@@ -24,5 +25,7 @@
 
     public void imgClicked(string name){
         Console.WriteLine("Img " + name);
+        ProductService.SetCurrentProduct(name);
+        NavigationManager.NavigateTo("ProductPage");
     }
 }
