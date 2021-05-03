@@ -1,0 +1,14 @@
+@page "/men"
+
+
+@int i =1;
+@foreach (var answer in Model.Question.Answers)
+{<img src="../../Content/images/"+i+".png" , alt = "question"/>
+@Html.DisplayFor(modelItem => answer.Description)
+i++;
+    <br/>
+}
+
+@code{
+    int i = 1;
+}
