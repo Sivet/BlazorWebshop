@@ -11,14 +11,10 @@ namespace BlazorWebshop.Data
     class ImageService
     {
         private static readonly string path = @"\ImagesFolder\";
-
         IEnumerable<string> filesNames;
-
         static List<Img> imageList;
-
         public  ImageService()
         {
-
             DirectoryInfo folder = new DirectoryInfo("wwwroot"+path);
             FileInfo[] fileHandle = folder.GetFiles("*.*", SearchOption.AllDirectories);
             filesNames = fileHandle.Select(file => file.Name);
@@ -31,19 +27,9 @@ namespace BlazorWebshop.Data
                 Console.WriteLine(item.Name);
                 Console.WriteLine(item.Path);
             }
-
         }
         public Task<List<Img>> getImages(){
             return Task.FromResult(imageList);
-
-            /*List<string> temp = new List<string>();
-            foreach(var path in filesNames){
-                temp.Add(path);
-            }
-            return Task.FromResult(temp);*/
         }
-        /*public Task<List<Image>> getImages(){
-            return Task.FromResult(myImageList);
-        }*/
     }
 }
