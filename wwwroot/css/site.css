@@ -13,9 +13,26 @@ a, .btn-link {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
-
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 5px;
+}
+.column{
+    float : left;
+    width: 33.33%;
+}
+.row::after{
+    content: "";
+    display: table;
+    clear: both;
+}
 .content {
     padding-top: 1.1rem;
+}
+img{
+    width: 95%;
+    padding: 5px;
 }
 
 .valid.modified:not([type=checkbox]) {

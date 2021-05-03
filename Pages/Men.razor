@@ -1,14 +1,28 @@
 @page "/men"
 
+@using BlazorWebshop.Data
+@using System.Drawing
+@inject ImageService ImgService
 
-@int i =1;
-@foreach (var answer in Model.Question.Answers)
-{<img src="../../Content/images/"+i+".png" , alt = "question"/>
-@Html.DisplayFor(modelItem => answer.Description)
-i++;
-    <br/>
-}
+<h1>Men's Clothes</h1>
+<div class="row">
+    @foreach (var image in _images)
+    {
+        <div class="column">
+            <img src=@image.Path asp-append-version="true" @onclick="imgClicked"/>
+            <label>@image.Name</label>
+        </div>
+    }
+</div>
 
 @code{
-    int i = 1;
+    List<Img> _images;
+    protected override async Task OnInitializedAsync()
+    {
+        _images = await ImgService.getImages();
+    }
+
+    public void imgClicked(){
+        Console.WriteLine("Img was clicked");
+    }
 }
