@@ -31,6 +31,7 @@ namespace BlazorWebshop
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<ImageService>();
             services.AddSingleton<ProductService>();
+            services.AddSingleton<CartService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

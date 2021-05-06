@@ -1,4 +1,8 @@
+@using BlazorWebshop.Data
+@implements IDisposable
 @inherits LayoutComponentBase
+@inject CartService CartService
+@inject NavigationManager NavigationManager
 
 <div class="page">
     <div class="sidebar">
@@ -7,6 +11,9 @@
 
     <div class="main">
         <div class="top-row px-4">
+            <button class="btn btn-success" type="button" @onclick="GoToCart">
+            <span class="oi oi-cart"></span>  Cart (@CartService.cartSize)
+        </button>
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>
 
@@ -15,3 +22,18 @@
         </div>
     </div>
 </div>
+
+@code{
+    protected override void OnInitialized()
+    {
+        CartService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        CartService.OnChange -= StateHasChanged;
+    }
+    public void GoToCart(){
+        NavigationManager.NavigateTo("Cart");
+    }
+}

@@ -22,10 +22,20 @@ a, .btn-link {
     float : left;
     width: 33.33%;
 }
+#wrapper{
+    border: 1px solid black;
+}
+.twoColumn{
+    width: 49%;
+    float:left;
+}
 .row::after{
     content: "";
     display: table;
     clear: both;
+}
+.cart-element{
+    height: 15%;
 }
 .content {
     padding-top: 1.1rem;

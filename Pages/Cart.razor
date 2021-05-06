@@ -1,0 +1,37 @@
+@page "/cart"
+
+@using BlazorWebshop.Data
+@inject ProductService ProductService
+@inject CartService CartService
+
+<h1>Cart</h1>
+<div class="row">
+    @foreach (var item in cartItems)
+    {
+        <div class="cart-element">
+            <label>@item.Name</label>
+            <img src=@item.Image.Path asp-append-version="true"/>
+            <button class="btn btn-success" type="button" @onclick="() => AddToCart(item)">
+                <span class="oi oi-arrow-thick-top"></span> Add Another
+            </button>
+            <button class="btn btn-success" type="button" @onclick="() => RemoveFromCart(item)">
+                <span class="oi oi-arrow-thick-top"></span> Remove
+            </button>
+        </div>
+    }
+</div>
+
+@code{
+    List<Product> cartItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cartItems = await CartService.GetCurrentCart();
+    }
+    public void AddToCart(Product prod){
+        CartService.Add(prod);
+    }
+    public void RemoveFromCart(Product prod){
+        CartService.Remove(prod);
+    }
+}

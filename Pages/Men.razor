@@ -18,6 +18,7 @@
 
 @code{
     List<Img> _images;
+
     protected override async Task OnInitializedAsync()
     {
         _images = await ImgService.getImages();

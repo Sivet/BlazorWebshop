@@ -16,7 +16,7 @@ namespace BlazorWebshop.Data
             currentProduct = new Product();
         }
         public Task<Product> GetCurrentProduct(){
-            return Task.FromResult(currentProduct);
+            return Task.FromResult(new Product(currentProduct));
         }
         public void SetCurrentProduct(string name){
             currentProduct.Name = name;
