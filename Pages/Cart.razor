@@ -1,0 +1,50 @@
+@page "/cart"
+
+@using BlazorWebshop.Data
+@inject ProductService ProductService
+@inject CartService CartService
+
+<h1>Cart</h1>
+
+<button class="btn btn-success" type="button" @onclick="Order" style="float: right;">
+    <span class="oi oi-dollar"></span> Order
+</button>
+
+<h2 hidden=@waitingForOrder >Thanks for shopping with us today!</h2>
+
+<div class="row">
+    @foreach (var item in cartItems)
+    {
+        <div class="cart-element">
+            <label>@item.Name</label>
+            <img src=@item.Image.Path asp-append-version="true"/>
+            <button class="btn btn-success" type="button" @onclick="() => AddToCart(item)">
+                <span class="oi oi-arrow-thick-top"></span> Add Another
+            </button>
+            <button class="btn btn-success" type="button" @onclick="() => RemoveFromCart(item)">
+                <span class="oi oi-arrow-thick-top"></span> Remove
+            </button>
+        </div>
+    }
+</div>
+
+@code{
+    List<Product> cartItems;
+    bool waitingForOrder = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cartItems = await CartService.GetCurrentCart();
+    }
+    public void AddToCart(Product prod){
+        CartService.Add(prod);
+    }
+    public void RemoveFromCart(Product prod){
+        CartService.Remove(prod);
+    }
+    public void Order(){
+        CartService.Empty();
+        cartItems = new List<Product>();
+        waitingForOrder = false;
+    }
+}

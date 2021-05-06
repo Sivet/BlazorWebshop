@@ -1,0 +1,33 @@
+@page "/productpage"
+
+@using BlazorWebshop.Data
+@inject ImageService ImgService
+@inject ProductService ProductService
+@inject CartService CartService
+
+<h1>Product</h1>
+
+<p>Current product: @product.Name</p>
+<div id="wrapper">
+    <div class="twoColumn">
+        <img src=@product.Image.Path asp-append-version="true" width="500" height="500"/>
+    </div>
+    <div class="twoColumn">
+        <label>@product.Information</label>
+        <button class="btn btn-success" type="button" @onclick="AddToCart">
+            <span class="oi oi-arrow-thick-top"></span> Add to Cart
+        </button>
+    </div>
+</div>
+
+@code{
+    Product product;
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await ProductService.GetCurrentProduct();
+    }
+    public void AddToCart(){
+        CartService.Add(product);
+    }
+}
