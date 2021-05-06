@@ -5,6 +5,13 @@
 @inject CartService CartService
 
 <h1>Cart</h1>
+
+<button class="btn btn-success" type="button" @onclick="Order" style="float: right;">
+    <span class="oi oi-dollar"></span> Order
+</button>
+
+<h2 hidden=@waitingForOrder >Thanks for shopping with us today!</h2>
+
 <div class="row">
     @foreach (var item in cartItems)
     {
@@ -23,6 +30,7 @@
 
 @code{
     List<Product> cartItems;
+    bool waitingForOrder = true;
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,5 +41,10 @@
     }
     public void RemoveFromCart(Product prod){
         CartService.Remove(prod);
+    }
+    public void Order(){
+        CartService.Empty();
+        cartItems = new List<Product>();
+        waitingForOrder = false;
     }
 }

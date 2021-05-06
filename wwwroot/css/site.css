@@ -40,6 +40,11 @@ a, .btn-link {
 .content {
     padding-top: 1.1rem;
 }
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
 img{
     width: 95%;
     padding: 5px;

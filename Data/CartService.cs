@@ -40,6 +40,11 @@ namespace BlazorWebshop.Data
             }
             NotifyStateChanged();
         }
+        public void Empty(){
+            currentCart = new Cart();
+            cartSize = 0;
+            NotifyStateChanged();
+        }
         public int GetCartSize(){
             return currentCart.Products.Count();
         }
